@@ -1,20 +1,20 @@
 
-export const locationURLs = (countryIds="US", namePrefix=null) => {
-  const makeParams = () => {
-    const keys = []
-    const params = []
-    if (countryIds) {
-      keys.push("countryIds")
-    }
-    if (namePrefix) {
-      keys.push("namePrefix")
-    }
+export const locationURLs = (countryIds="US", namePrefix="") => {
+  // const makeParams = () => {
+  //   const keys = []
+  //   const params = []
+  //   if (countryIds) {
+  //     keys.push("countryIds")
+  //   }
+  //   if (namePrefix) {
+  //     keys.push("namePrefix")
+  //   }
     
-  }
+  // }
 
   return {
     ROOT: "http://geodb-free-service.wirefreethought.com/v1/geo",
-    CITIES: `cities?`
+    CITIES: `cities?${countryIds ? `countryIds=${countryIds}&` : ""}namePrefix=${namePrefix}`
   }
 }
 
