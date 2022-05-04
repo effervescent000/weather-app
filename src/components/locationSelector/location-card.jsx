@@ -2,13 +2,18 @@ import React, { useContext } from "react";
 
 import { LocationContext } from "../../utils/location-context";
 
-const LocationCard = ({ id, city, region, country, latitude, longitude }) => {
-  const { currentLocation } = useContext(LocationContext);
+const LocationCard = ({ location }) => {
+  const { currentLocation, setCurrentLocation } = useContext(LocationContext);
 
   return (
-    <div className={`location-card${id === currentLocation.id ? " active" : ""}`}>
-      <span className="city">{city}</span> <span className="region">{region}</span>{" "}
-      <span className="country">{country}</span>
+    <div
+      className={`location-card${location.id === currentLocation.id ? " active" : ""}`}
+      onClick={() => setCurrentLocation(location)}
+    >
+      <span className="city">{location.name}</span>,{" "}
+      <span className="region">{location.region}</span>
+      {", "}
+      <span className="country">{location.country}</span>
     </div>
   );
 };
