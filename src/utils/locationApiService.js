@@ -5,7 +5,7 @@ export class LocationAPIService {
     // add a constructor here if I get a pro plan and need auth
 
     async makeGetRequest(endpoint) {
-        const url = `${locationURLs.ROOT}/${endpoint}`
+        const url = `${locationURLs().ROOT}/${endpoint}`
         const response = await axios.get(url)
         return response
     }
