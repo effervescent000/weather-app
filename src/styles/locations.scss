@@ -1,0 +1,16 @@
+.locations-panel {
+  width: max(250px, 20vw);
+  border: 1px $blue-gray solid;
+  border-radius: 5px;
+
+  .location-card {
+    margin: 0.5em;
+    padding: 0.25em;
+    border: 1px $light-blue solid;
+    border-radius: 5px;
+  }
+
+  .active {
+    background-color: $light-blue;
+  }
+}
