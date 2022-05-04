@@ -8,6 +8,10 @@
     padding: 0.25em;
     border: 1px $light-blue solid;
     border-radius: 5px;
+
+    span.city {
+      font-size: 1.1em;
+    }
   }
 
   .active {

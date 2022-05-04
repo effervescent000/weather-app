@@ -18,7 +18,7 @@ function App() {
   }, []);
 
   return (
-    <LocationContext.Provider value={{ currentLocation }}>
+    <LocationContext.Provider value={{ currentLocation, setCurrentLocation }}>
       <LocationPanel locationData={locationData} />
     </LocationContext.Provider>
   );
