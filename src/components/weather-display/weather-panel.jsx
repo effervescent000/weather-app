@@ -50,6 +50,7 @@ const WeatherPanel = (props) => {
           primary
           temp={matchTime(now, weatherData.temperature.values)}
           weather={matchTime(now, weatherData.weather.values)}
+          skyCover={matchTime(now, weatherData.skyCover.values)}
         />
       )}
     </div>

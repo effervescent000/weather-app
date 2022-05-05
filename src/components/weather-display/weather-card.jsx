@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const WeatherCard = ({ temp, primary, weather }) => {
+const WeatherCard = ({ temp, primary, weather, skyCover }) => {
   const [weatherConditions, setWeatherConditions] = useState({});
   const coverageMapping = {
     slight_chance: 1,
@@ -12,13 +12,21 @@ const WeatherCard = ({ temp, primary, weather }) => {
     rain_showers: "Rainy",
     thunderstorms: "Stormy",
     sunny: "Sunny",
+    very_cloudy: "Overcast",
+    cloudy: "Cloudy",
+  };
+  const conditionObject = {
+    coverage: null,
+    weather: null,
+    intensity: null,
+    attributes: [],
   };
 
   useEffect(() => {
     if (weather) {
       setWeatherConditions(getWeatherConditions());
     }
-  }, [weather]);
+  }, [weather, skyCover]);
 
   const getWeatherConditions = () => {
     if (weather.value[0].coverage) {
@@ -27,11 +35,13 @@ const WeatherCard = ({ temp, primary, weather }) => {
         return condition;
       }
     }
-    return {
-      coverage: null,
-      weather: "sunny",
-      intensity: null,
-    };
+    if (skyCover.value >= 95) {
+      return { ...conditionObject, weather: "very_cloudy" };
+    }
+    if (skyCover.value >= 60) {
+      return { ...conditionObject, weather: "cloudy" };
+    }
+    return { ...conditionObject, weather: "sunny" };
   };
 
   return (
