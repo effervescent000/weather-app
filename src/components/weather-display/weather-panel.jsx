@@ -9,6 +9,7 @@ const WeatherPanel = (props) => {
   const { currentLocation } = useContext(LocationContext);
   const [gridData, setGridData] = useState({});
   const [weatherData, setWeatherData] = useState({});
+  const now = new Date();
 
   useEffect(() => {
     if (Object.keys(currentLocation).length > 0) {
@@ -43,9 +44,13 @@ const WeatherPanel = (props) => {
   };
 
   return (
-    <div>
+    <div className="weather-panel">
       {Object.keys(weatherData).length && (
-        <WeatherCard temp={matchTime(new Date(), weatherData.temperature.values)} primary />
+        <WeatherCard
+          primary
+          temp={matchTime(now, weatherData.temperature.values)}
+          weather={matchTime(now, weatherData.weather.values)}
+        />
       )}
     </div>
   );

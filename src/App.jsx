@@ -1,7 +1,7 @@
 // import logo from './logo.svg';
 import "./styles/main.scss";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import { LocationContext } from "./utils/location-context";
 
