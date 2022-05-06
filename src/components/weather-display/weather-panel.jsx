@@ -42,18 +42,41 @@ const WeatherPanel = (props) => {
       }
     }
   };
+  console.log(now);
+
+  const renderWeatherCards = () => {
+    const cards = [];
+    const updateTime = (i) => {
+      const updatedTime = new Date(now.getTime());
+      updatedTime.setHours(updatedTime.getHours() + i);
+      console.log(now);
+      return updatedTime;
+    };
+    cards.push(
+      <WeatherCard
+        primary
+        temp={matchTime(now, weatherData.temperature.values)}
+        weather={matchTime(now, weatherData.weather.values)}
+        skyCover={matchTime(now, weatherData.skyCover.values)}
+        time={now}
+      />
+    );
+    for (let i = 1; i < 6; i++) {
+      const updatedTime = updateTime(i);
+      cards.push(
+        <WeatherCard
+          temp={matchTime(updatedTime, weatherData.temperature.values)}
+          weather={matchTime(updatedTime, weatherData.weather.values)}
+          skyCover={matchTime(updatedTime, weatherData.skyCover.values)}
+          time={updatedTime}
+        />
+      );
+    }
+    return cards;
+  };
 
   return (
-    <div className="weather-panel">
-      {Object.keys(weatherData).length && (
-        <WeatherCard
-          primary
-          temp={matchTime(now, weatherData.temperature.values)}
-          weather={matchTime(now, weatherData.weather.values)}
-          skyCover={matchTime(now, weatherData.skyCover.values)}
-        />
-      )}
-    </div>
+    <div className="weather-panel">{Object.keys(weatherData).length && renderWeatherCards()}</div>
   );
 };
 

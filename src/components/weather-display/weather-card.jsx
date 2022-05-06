@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const WeatherCard = ({ temp, primary, weather, skyCover }) => {
+const WeatherCard = ({ temp, primary, weather, skyCover, time }) => {
   const [weatherConditions, setWeatherConditions] = useState({});
   const coverageMapping = {
     slight_chance: 1,
@@ -26,7 +26,7 @@ const WeatherCard = ({ temp, primary, weather, skyCover }) => {
     if (weather) {
       setWeatherConditions(getWeatherConditions());
     }
-  }, [weather, skyCover]);
+  }, [weather, skyCover, temp]);
 
   const getWeatherConditions = () => {
     if (weather.value[0].coverage) {
@@ -45,7 +45,15 @@ const WeatherCard = ({ temp, primary, weather, skyCover }) => {
   };
 
   return (
-    <div className={`weather-card d-flex justify-end${primary ? " primary" : ""}`}>
+    <div
+      className={`weather-card d-flex justify-space-between align-items-center${
+        primary ? " primary" : ""
+      }`}
+    >
+      <div className="time">
+        <span className="date">{`${time.getMonth() + 1}/${time.getDate()}/${time.getYear()}`}</span>{" "}
+        <span className="time">{`${time.getHours()}:${time.getMinutes()}`}</span>
+      </div>
       <div className="weather-conditions">
         {Object.keys(weatherConditions).length && conditionMapping[weatherConditions.weather]}
       </div>
