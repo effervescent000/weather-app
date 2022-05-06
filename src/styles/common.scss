@@ -7,6 +7,18 @@ body {
   display: flex;
 }
 
-.space-between {
+.justify-space-between {
   justify-content: space-between;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.align-items-center {
+  align-items: center;
 }

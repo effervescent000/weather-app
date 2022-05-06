@@ -1,0 +1,16 @@
+.weather-panel {
+  @include panel-styling();
+
+  .weather-card {
+    @include card-styling();
+    .temp {
+      font-size: 1.5em;
+    }
+  }
+  .weather-card.primary {
+    border: 2px $light-blue solid;
+    .temp {
+      font-size: 2em;
+    }
+  }
+}

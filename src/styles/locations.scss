@@ -1,14 +1,8 @@
 .locations-panel {
-  width: max(250px, 20vw);
-  border: 1px $blue-gray solid;
-  border-radius: 5px;
-  margin: 0.25em;
+  @include panel-styling();
 
   .location-card {
-    margin: 0.5em;
-    padding: 0.25em;
-    border: 1px $light-blue solid;
-    border-radius: 5px;
+    @include card-styling();
 
     span.city {
       font-size: 1.1em;
