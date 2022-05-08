@@ -42,7 +42,6 @@ const WeatherPanel = (props) => {
       }
     }
   };
-  console.log(now);
 
   const renderWeatherCards = () => {
     const cards = [];
