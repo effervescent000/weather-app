@@ -59,6 +59,7 @@ const WeatherPanel = (props) => {
     cards.push(
       <WeatherCard
         primary
+        key={0}
         temp={matchTime(now, weather.temperature.values)}
         weather={matchTime(now, weather.weather.values)}
         skyCover={matchTime(now, weather.skyCover.values)}
@@ -69,6 +70,7 @@ const WeatherPanel = (props) => {
       const updatedTime = updateTime(i);
       cards.push(
         <WeatherCard
+          key={i}
           temp={matchTime(updatedTime, weather.temperature.values)}
           weather={matchTime(updatedTime, weather.weather.values)}
           skyCover={matchTime(updatedTime, weather.skyCover.values)}
