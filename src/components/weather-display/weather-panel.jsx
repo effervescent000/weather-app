@@ -48,7 +48,6 @@ const WeatherPanel = (props) => {
     const updateTime = (i) => {
       const updatedTime = new Date(now.getTime());
       updatedTime.setHours(updatedTime.getHours() + i);
-      console.log(now);
       return updatedTime;
     };
     cards.push(
