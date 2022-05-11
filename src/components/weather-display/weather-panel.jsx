@@ -1,14 +1,20 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
+import { weatherConstants } from "../../constants/weather.constants";
 import { weatherURLs } from "../../utils/constants";
-import { LocationContext } from "../../utils/location-context";
 import weatherApiService from "../../utils/weatherApiService";
 import WeatherCard from "./weather-card";
 
 const WeatherPanel = (props) => {
-  const { currentLocation } = useContext(LocationContext);
+  // const { currentLocation } = useContext(LocationContext);
+  const currentLocation = useSelector((state) => state.location);
+  const weather = useSelector((state) => state.weather);
+  const dispatch = useDispatch();
+  const setWeather = (data) => dispatch({ type: weatherConstants.SET_WEATHER, weather: data });
+
   const [gridData, setGridData] = useState({});
-  const [weatherData, setWeatherData] = useState({});
+  // const [weatherData, setWeatherData] = useState({});
   const now = new Date();
 
   useEffect(() => {
@@ -28,7 +34,7 @@ const WeatherPanel = (props) => {
       weatherApiService.GET(
         weatherURLs({ office: gridData.office, gridX: gridData.gridX, gridY: gridData.gridY })
           .FORECAST,
-        (response) => setWeatherData(response.data.properties)
+        (response) => setWeather(response.data.properties)
       );
     }
   }, [gridData]);
@@ -53,9 +59,9 @@ const WeatherPanel = (props) => {
     cards.push(
       <WeatherCard
         primary
-        temp={matchTime(now, weatherData.temperature.values)}
-        weather={matchTime(now, weatherData.weather.values)}
-        skyCover={matchTime(now, weatherData.skyCover.values)}
+        temp={matchTime(now, weather.temperature.values)}
+        weather={matchTime(now, weather.weather.values)}
+        skyCover={matchTime(now, weather.skyCover.values)}
         time={now}
       />
     );
@@ -63,9 +69,9 @@ const WeatherPanel = (props) => {
       const updatedTime = updateTime(i);
       cards.push(
         <WeatherCard
-          temp={matchTime(updatedTime, weatherData.temperature.values)}
-          weather={matchTime(updatedTime, weatherData.weather.values)}
-          skyCover={matchTime(updatedTime, weatherData.skyCover.values)}
+          temp={matchTime(updatedTime, weather.temperature.values)}
+          weather={matchTime(updatedTime, weather.weather.values)}
+          skyCover={matchTime(updatedTime, weather.skyCover.values)}
           time={updatedTime}
         />
       );
@@ -74,7 +80,9 @@ const WeatherPanel = (props) => {
   };
 
   return (
-    <div className="weather-panel">{Object.keys(weatherData).length && renderWeatherCards()}</div>
+    <div className="weather-panel">
+      {Object.keys(weather.temperature).length && renderWeatherCards()}
+    </div>
   );
 };
 
