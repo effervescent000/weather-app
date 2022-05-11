@@ -1,14 +1,17 @@
-import React, { useContext } from "react";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import { LocationContext } from "../../utils/location-context";
+import { locationConstants } from "../../constants/location.constants";
 
 const LocationCard = ({ location }) => {
-  const { currentLocation, setCurrentLocation } = useContext(LocationContext);
+  const currentLocation = useSelector((state) => state.location);
+  const dispatch = useDispatch();
+  const setCurrentLocation = () => dispatch({ type: locationConstants.SET_LOCATION, location });
 
   return (
     <div
       className={`location-card${location.id === currentLocation.id ? " active" : ""}`}
-      onClick={() => setCurrentLocation(location)}
+      onClick={() => setCurrentLocation()}
     >
       <span className="city">{location.name}</span>,{" "}
       <span className="region">{location.region}</span>

@@ -1,4 +1,5 @@
 // import logo from './logo.svg';
+import "bootstrap/scss/bootstrap.scss";
 import "./styles/main.scss";
 
 import React, { useState } from "react";

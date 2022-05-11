@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 
 import locationApiService from "../../utils/locationApiService";
-import { locationURLs } from "../../utils/constants";
+import { locationURLs } from "../../constants/constants";
 import { LocationContext } from "../../utils/location-context";
 
 const LocationInput = (props) => {
