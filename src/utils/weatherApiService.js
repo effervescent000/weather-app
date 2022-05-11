@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { weatherURLs } from "./constants";
+import { weatherURLs } from "../constants/constants";
 
 export class WeatherAPIService {
   constructor() {

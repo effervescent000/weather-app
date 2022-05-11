@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { weatherConstants } from "../../constants/weather.constants";
-import { weatherURLs } from "../../utils/constants";
+import { weatherURLs } from "../../constants/constants";
 import weatherApiService from "../../utils/weatherApiService";
 import WeatherCard from "./weather-card";
 

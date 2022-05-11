@@ -1,5 +1,5 @@
 import axios from "axios";
-import { locationURLs } from "./constants";
+import { locationURLs } from "../constants/constants";
 
 export class LocationAPIService {
   // add a constructor here if I get a pro plan and need auth
