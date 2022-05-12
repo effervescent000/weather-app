@@ -10,10 +10,15 @@ const ActivityCard = ({ activity }) => {
 
   return (
     <div
-      className={`activity-card${activity.name === currentActivity.name ? " active" : ""}`}
+      className={`activity-card d-flex align-items-center${
+        activity.name === currentActivity.name ? " active" : ""
+      }`}
       onClick={setActivity}
     >
-      {activity.name}
+      <div className="icon-wrapper">
+        <img src={activity.icon} alt={`${activity.name} icon`} />
+      </div>
+      <div className="text-wrapper">{activity.name}</div>
     </div>
   );
 };

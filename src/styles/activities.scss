@@ -1,0 +1,11 @@
+.activity-card {
+  @include card-styling();
+  gap: 5px;
+  .icon-wrapper img {
+    height: 3em;
+  }
+}
+
+.activity-card.active {
+  @include active-styling();
+}

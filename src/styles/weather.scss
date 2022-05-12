@@ -8,7 +8,7 @@
     }
   }
   .weather-card.primary {
-    border: 2px $light-blue solid;
+    @include active-styling();
     .temp {
       font-size: 2em;
     }

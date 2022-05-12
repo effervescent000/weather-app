@@ -13,3 +13,7 @@
   border-radius: 5px;
   @content;
 }
+
+@mixin active-styling {
+  border: 2px $light-blue solid;
+}

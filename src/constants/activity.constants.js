@@ -11,6 +11,7 @@ export const activitiesArray = [
       relativeHumidity: [0, 60],
       windSpeed: [0, 20],
     },
+    icon: `${process.env.PUBLIC_URL}/assets/images/running.png`,
   },
   {
     name: "Surfing",
@@ -18,5 +19,6 @@ export const activitiesArray = [
       probabilityOfPrecipitation: [0, 0],
       waveHeight: [1.2, 2.5],
     },
+    icon: `${process.env.PUBLIC_URL}/assets/images/surfing.png`,
   },
 ];
