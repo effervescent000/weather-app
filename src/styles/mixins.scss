@@ -16,4 +16,6 @@
 
 @mixin active-styling {
   border: 2px $light-blue solid;
+  background-color: $light-blue;
+  @content;
 }

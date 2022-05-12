@@ -8,4 +8,5 @@
 
 .activity-card.active {
   @include active-styling();
+  background-color: $light-blue;
 }
