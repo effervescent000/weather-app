@@ -5,6 +5,7 @@ import { weatherConstants } from "../../constants/weather.constants";
 import { weatherURLs } from "../../constants/constants";
 import weatherApiService from "../../utils/weatherApiService";
 import WeatherCard from "./weather-card";
+import { matchWeatherToTime } from "../../utils/utils";
 
 const WeatherPanel = (props) => {
   // const { currentLocation } = useContext(LocationContext);
@@ -39,16 +40,6 @@ const WeatherPanel = (props) => {
     }
   }, [gridData]);
 
-  const matchTime = (targetTime, weatherArray) => {
-    for (const item of weatherArray) {
-      if (
-        Date.parse(item.validTime.substring(0, item.validTime.length - 5)) >= Date.parse(targetTime)
-      ) {
-        return item;
-      }
-    }
-  };
-
   const renderWeatherCards = () => {
     const cards = [];
     const updateTime = (i) => {
@@ -60,9 +51,9 @@ const WeatherPanel = (props) => {
       <WeatherCard
         primary
         key={0}
-        temp={matchTime(now, weather.temperature.values)}
-        weather={matchTime(now, weather.weather.values)}
-        skyCover={matchTime(now, weather.skyCover.values)}
+        temp={matchWeatherToTime(now, weather.temperature.values)}
+        weather={matchWeatherToTime(now, weather.weather.values)}
+        skyCover={matchWeatherToTime(now, weather.skyCover.values)}
         time={now}
       />
     );
@@ -71,9 +62,9 @@ const WeatherPanel = (props) => {
       cards.push(
         <WeatherCard
           key={i}
-          temp={matchTime(updatedTime, weather.temperature.values)}
-          weather={matchTime(updatedTime, weather.weather.values)}
-          skyCover={matchTime(updatedTime, weather.skyCover.values)}
+          temp={matchWeatherToTime(updatedTime, weather.temperature.values)}
+          weather={matchWeatherToTime(updatedTime, weather.weather.values)}
+          skyCover={matchWeatherToTime(updatedTime, weather.skyCover.values)}
           time={updatedTime}
         />
       );
