@@ -1,6 +1,6 @@
 const parseNWSDate = (date) => {
   try {
-    return new Date(date.substring(0, date.match(/\/.*$/)[0].length));
+    return new Date(date.substring(0, date.length - date.match(/\/.*$/)[0].length));
   } catch (error) {
     console.log("parseNWSDate", date);
   }
