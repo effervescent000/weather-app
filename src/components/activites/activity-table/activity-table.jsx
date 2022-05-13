@@ -44,8 +44,8 @@ const ActivityTable = (props) => {
     const newDate = new Date(today);
     const tableRows = [];
     for (let i = 0; i < NUM_DAYS; i++) {
-      newDate.setDate(today.getDate() + i);
-      tableRows.push(<TableRow key={i} date={newDate} weatherArray={weatherArray} />);
+      newDate.setDate(today.getDate() + 1 + i);
+      tableRows.push(<TableRow key={i} date={new Date(newDate)} weatherArray={weatherArray} />);
     }
 
     return <tbody>{tableRows}</tbody>;
