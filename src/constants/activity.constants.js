@@ -2,6 +2,8 @@ export const activityConstants = {
   SET_ACTIVITY: "activity/activityChange",
 };
 
+export const NUM_DAYS = 7;
+
 export const activitiesArray = [
   {
     name: "Running",

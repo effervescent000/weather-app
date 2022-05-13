@@ -1,3 +1,17 @@
+export const weatherKeys = [
+  "temperature",
+  "relativeHumidity",
+  "apparentTemperature",
+  "skyCover",
+  "windSpeed",
+  "windGust",
+  "weather",
+  "hazards",
+  "probabilityOfPrecipitation",
+  "lightningActivityLevel",
+  "waveHeight",
+];
+
 export const locationURLs = (countryIds = "US", namePrefix = "") => {
   return {
     ROOT: "http://geodb-free-service.wirefreethought.com/v1/geo",

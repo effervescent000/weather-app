@@ -15,7 +15,6 @@ const WeatherPanel = (props) => {
   const setWeather = (data) => dispatch({ type: weatherConstants.SET_WEATHER, weather: data });
 
   const [gridData, setGridData] = useState({});
-  // const [weatherData, setWeatherData] = useState({});
   const now = new Date();
 
   useEffect(() => {
@@ -43,7 +42,7 @@ const WeatherPanel = (props) => {
   const renderWeatherCards = () => {
     const cards = [];
     const updateTime = (i) => {
-      const updatedTime = new Date(now.getTime());
+      const updatedTime = new Date(now);
       updatedTime.setHours(updatedTime.getHours() + i);
       return updatedTime;
     };
