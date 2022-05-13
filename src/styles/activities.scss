@@ -1,11 +1,21 @@
-.activity-card {
-  @include card-styling();
-  gap: 5px;
-  .icon-wrapper img {
-    height: 3em;
-  }
-}
+.activities {
+  .activities-selector-panel {
+    @include panel-styling();
 
-.activity-card.active {
-  @include active-styling();
+    .activity-card {
+      @include card-styling();
+      gap: 5px;
+      .icon-wrapper img {
+        height: 3em;
+      }
+    }
+
+    .activity-card.active {
+      @include active-styling();
+    }
+  }
+
+  .activity-table-panel {
+    @include panel-styling();
+  }
 }

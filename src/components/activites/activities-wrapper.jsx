@@ -5,7 +5,7 @@ import ActivityTable from "./activity-table/activity-table";
 
 const ActivitiesWrapper = (props) => {
   return (
-    <div className="activities">
+    <div className="activities grid-two-cols">
       <ActivitySelectorPanel />
       <ActivityTable />
     </div>

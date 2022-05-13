@@ -60,14 +60,16 @@ const ActivityTable = (props) => {
       newDate.setDate(today.getDate() + i);
       weatherArrays.push(assembleWeatherArray(newDate));
     }
-    console.log(weatherArrays);
+    // console.log(weatherArrays);
     return weatherArrays;
   };
 
   return (
-    <table>
-      <DatesHeader date={new Date()} />
-    </table>
+    <div className="activity-table-panel">
+      <table>
+        <DatesHeader date={new Date()} />
+      </table>
+    </div>
   );
 };
 

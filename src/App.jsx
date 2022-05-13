@@ -20,7 +20,7 @@ function App() {
     >
       <div className="app d-flex justify-center">
         <div className="page-wrapper">
-          <div className="top-grid d-flex">
+          <div className="top-grid grid-two-cols">
             <WeatherPanel />
             <LocationsPanel locationData={locationData} />
           </div>

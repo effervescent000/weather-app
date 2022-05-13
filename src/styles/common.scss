@@ -22,3 +22,8 @@ body {
 .align-items-center {
   align-items: center;
 }
+
+.grid-two-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
