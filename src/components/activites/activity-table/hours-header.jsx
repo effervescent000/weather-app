@@ -6,7 +6,7 @@ const HoursHeader = () => {
       return <th key={i}>{i}</th>;
     };
 
-    const hoursArray = [];
+    const hoursArray = [<th key={"empty cell"} />];
     for (let i = 0; i < 24; i++) {
       hoursArray.push(renderHour(i));
     }
