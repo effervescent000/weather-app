@@ -5,57 +5,33 @@ import { weatherKeys } from "../../../constants/constants";
 import { NUM_DAYS } from "../../../constants/activity.constants";
 import { getEventsInDate } from "../../../utils/utils";
 
+import TableRow from "./table-row";
 import HoursHeader from "./hours-header";
 
 const ActivityTable = (props) => {
   const weather = useSelector((state) => state.weather);
-  const [weatherArrays, setWeatherArrays] = useState([]);
+  const activity = useSelector((state) => state.activity);
+  const [weatherArray, setWeatherArray] = useState([]);
+  const today = new Date();
 
   useEffect(() => {
     if (Object.keys(weather.temperature).length) {
-      setWeatherArrays(makeWeatherArrays());
+      setWeatherArray(makeWeatherArrays());
     }
   }, [weather]);
 
   const makeWeatherArrays = () => {
     const assembleWeatherArray = (date) => {
-      const dayConditionsArray = [];
+      let dayConditions = {};
       for (const key of weatherKeys) {
-        dayConditionsArray.push({
-          [key]: getEventsInDate(date, weather[key].values),
-        });
+        dayConditions = { ...dayConditions, [key]: getEventsInDate(date, weather[key].values) };
       }
-      return dayConditionsArray;
+      return dayConditions;
     };
-    /* what I expect the return to look like:
-      [
-        an array of objects for each day, so like:
-        [
-          { 
-            temperature: [
-              {validTime: sometime, value: somenumber}, 
-              {validTime, value}...
-            ],
-            skyCover: [
-              {validTime, value}...
-            ]
-          },
-          { 
-            temperature: [
-              {validTime: sometime, value: somenumber}, 
-              {validTime, value}...
-            ],
-            skyCover: [
-              {validTime, value}...
-            ]
-          },...up to 7 items for 7 days out
-        ]
-      ]
-    */
-    const today = new Date();
+
     today.setHours(0);
     const weatherArrays = [];
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < NUM_DAYS; i++) {
       const newDate = new Date(today);
       newDate.setDate(today.getDate() + i);
       weatherArrays.push(assembleWeatherArray(newDate));
@@ -64,10 +40,22 @@ const ActivityTable = (props) => {
     return weatherArrays;
   };
 
+  const renderTableBody = () => {
+    const newDate = new Date(today);
+    const tableRows = [];
+    for (let i = 0; i < NUM_DAYS; i++) {
+      newDate.setDate(today.getDate() + i);
+      tableRows.push(<TableRow key={i} date={newDate} weatherArray={weatherArray} />);
+    }
+
+    return <tbody>{tableRows}</tbody>;
+  };
+
   return (
     <div className="activity-table-panel">
       <table>
         <HoursHeader />
+        {renderTableBody()}
       </table>
     </div>
   );

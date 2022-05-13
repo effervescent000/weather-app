@@ -2,14 +2,7 @@ import { activityConstants } from "../constants/activity.constants";
 
 const baseState = {
   name: "",
-  conditions: {
-    apparentTemperature: [],
-    probabilityOfPrecipitation: [],
-    relativeHumidity: [],
-    skyCover: [],
-    temperature: [],
-    windSpeed: [],
-  },
+  conditions: {},
 };
 
 const activityReducer = (state = baseState, action) => {
