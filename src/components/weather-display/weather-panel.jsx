@@ -8,7 +8,6 @@ import WeatherCard from "./weather-card";
 import { matchWeatherToTime } from "../../utils/utils";
 
 const WeatherPanel = (props) => {
-  // const { currentLocation } = useContext(LocationContext);
   const currentLocation = useSelector((state) => state.location);
   const weather = useSelector((state) => state.weather);
   const dispatch = useDispatch();

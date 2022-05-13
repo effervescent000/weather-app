@@ -5,7 +5,7 @@ import { weatherKeys } from "../../../constants/constants";
 import { NUM_DAYS } from "../../../constants/activity.constants";
 import { getEventsInDate } from "../../../utils/utils";
 
-import DatesHeader from "./dates-header";
+import HoursHeader from "./hours-header";
 
 const ActivityTable = (props) => {
   const weather = useSelector((state) => state.weather);
@@ -48,7 +48,7 @@ const ActivityTable = (props) => {
             skyCover: [
               {validTime, value}...
             ]
-          },
+          },...up to 7 items for 7 days out
         ]
       ]
     */
@@ -60,14 +60,14 @@ const ActivityTable = (props) => {
       newDate.setDate(today.getDate() + i);
       weatherArrays.push(assembleWeatherArray(newDate));
     }
-    // console.log(weatherArrays);
+    console.log(weatherArrays);
     return weatherArrays;
   };
 
   return (
     <div className="activity-table-panel">
       <table>
-        <DatesHeader date={new Date()} />
+        <HoursHeader />
       </table>
     </div>
   );
