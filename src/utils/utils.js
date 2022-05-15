@@ -31,4 +31,4 @@ const getEventsInDate = (date, array) => {
   return dateItems;
 };
 
-export { matchWeatherToTime, getEventsInDate };
+export { parseNWSDate, matchWeatherToTime, getEventsInDate };
