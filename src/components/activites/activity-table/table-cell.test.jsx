@@ -3,7 +3,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import TableCell from "./table-cell";
 import { wrapInStore, wrapTableCell, createTestStore } from "../../../utils/testUtils";
 
-describe("TableCell renders", () => {
+describe("TableCell renders successfully", () => {
   const store = createTestStore({
     activity: {
       name: "Surfing",

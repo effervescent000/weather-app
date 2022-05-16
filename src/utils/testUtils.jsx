@@ -19,6 +19,14 @@ const wrapTableCell = (ui) => {
   );
 };
 
+const wrapTableRow = (ui) => {
+  return (
+    <table>
+      <tbody>{ui}</tbody>
+    </table>
+  );
+};
+
 const createTestStore = (state = { activity: null, weather: null, location: null }) => {
   const store = configureStore({
     reducer: {
@@ -36,4 +44,4 @@ const createTestStore = (state = { activity: null, weather: null, location: null
   return store;
 };
 
-export { wrapInStore, wrapTableCell, createTestStore };
+export { wrapInStore, wrapTableCell, wrapTableRow, createTestStore };
