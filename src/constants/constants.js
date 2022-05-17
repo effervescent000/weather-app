@@ -4,7 +4,6 @@ export const weatherKeys = [
   "apparentTemperature",
   "skyCover",
   "windSpeed",
-  "windGust",
   "weather",
   "hazards",
   "probabilityOfPrecipitation",

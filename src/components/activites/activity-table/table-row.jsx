@@ -10,14 +10,11 @@ const TableRow = ({ date, weatherForDay }) => {
 
   const createCells = () => {
     const makeWeatherForTime = (hour) => {
-      let weatherForTime = {};
+      const weatherForTime = {};
       for (const key of Object.keys(activity.conditions)) {
         const newDate = new Date(date);
-        newDate.setHours(hour);
-        weatherForTime = {
-          ...weatherForTime,
-          [key]: matchWeatherToTime(newDate, weatherForDay[key]),
-        };
+        newDate.setHours(hour, 0, 0, 0);
+        weatherForTime[key] = matchWeatherToTime(newDate, weatherForDay[key]);
       }
       return weatherForTime;
     };
