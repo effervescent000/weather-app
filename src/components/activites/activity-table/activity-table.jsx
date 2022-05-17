@@ -8,9 +8,8 @@ import { getEventsInDate } from "../../../utils/utils";
 import TableRow from "./table-row";
 import HoursHeader from "./hours-header";
 
-const ActivityTable = (props) => {
+const ActivityTable = () => {
   const weather = useSelector((state) => state.weather);
-  const activity = useSelector((state) => state.activity);
   const [weatherArray, setWeatherArray] = useState([]);
   const today = new Date();
 
@@ -22,9 +21,9 @@ const ActivityTable = (props) => {
 
   const makeWeatherArrays = () => {
     const assembleWeatherArray = (date) => {
-      let dayConditions = {};
+      const dayConditions = {};
       for (const key of weatherKeys) {
-        dayConditions = { ...dayConditions, [key]: getEventsInDate(date, weather[key].values) };
+        dayConditions[key] = getEventsInDate(date, weather[key].values);
       }
       return dayConditions;
     };
@@ -36,7 +35,6 @@ const ActivityTable = (props) => {
       newDate.setDate(today.getDate() + i);
       weatherArrays.push(assembleWeatherArray(newDate));
     }
-    console.log(weatherArrays);
     return weatherArrays;
   };
 
@@ -44,8 +42,8 @@ const ActivityTable = (props) => {
     const newDate = new Date(today);
     const tableRows = [];
     for (let i = 0; i < NUM_DAYS; i++) {
-      newDate.setDate(today.getDate() + 1 + i);
-      tableRows.push(<TableRow key={i} date={new Date(newDate)} weatherArray={weatherArray} />);
+      newDate.setDate(today.getDate() + i);
+      tableRows.push(<TableRow key={i} date={new Date(newDate)} weatherForDay={weatherArray[i]} />);
     }
 
     return <tbody>{tableRows}</tbody>;
@@ -55,7 +53,7 @@ const ActivityTable = (props) => {
     <div className="activity-table-panel">
       <table>
         <HoursHeader />
-        {renderTableBody()}
+        {weatherArray && renderTableBody()}
       </table>
     </div>
   );

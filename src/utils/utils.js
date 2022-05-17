@@ -12,6 +12,7 @@ const matchWeatherToTime = (targetTime, array) => {
       return item;
     }
   }
+  return array.at(-1);
 };
 
 /* The passed-in array should be an array of objects with the shape of 
