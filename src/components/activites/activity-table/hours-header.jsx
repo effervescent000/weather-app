@@ -13,7 +13,11 @@ const HoursHeader = () => {
     return hoursArray;
   };
 
-  return <thead>{renderHours()}</thead>;
+  return (
+    <thead>
+      <tr>{renderHours()}</tr>
+    </thead>
+  );
 };
 
 export default HoursHeader;
