@@ -17,5 +17,8 @@
 
   .activity-table-panel {
     @include panel-styling();
+    table {
+      width: 100%;
+    }
   }
 }
