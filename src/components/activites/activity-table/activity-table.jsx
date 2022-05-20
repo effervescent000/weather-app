@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 import { weatherKeys } from "../../../constants/constants";
 import { NUM_DAYS } from "../../../constants/activity.constants";
-import { getEventsInDate } from "../../../utils/utils";
+import { getEventsForDate } from "../../../utils/utils";
 
 import TableRow from "./table-row";
 import HoursHeader from "./hours-header";
@@ -23,7 +23,7 @@ const ActivityTable = () => {
     const assembleWeatherArray = (date) => {
       const dayConditions = {};
       for (const key of weatherKeys) {
-        dayConditions[key] = getEventsInDate(date, weather[key].values);
+        dayConditions[key] = getEventsForDate(date, weather[key].values);
       }
       return dayConditions;
     };

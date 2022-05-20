@@ -1,4 +1,4 @@
-import { parseNWSDate, matchWeatherToTime, getEventsInDate } from "./utils";
+import { parseNWSDate, matchWeatherToTime, getEventsForDate } from "./utils";
 
 describe("Tests for parseNWSDate", () => {
   it("Parses a NWS date correctly", () => {
@@ -32,19 +32,40 @@ describe("Tests for matchWeatherToTime", () => {
   });
 });
 
-describe("Tests for getEventsInDate", () => {
+describe("Tests for getEventsForDate", () => {
   const targetDate = new Date("2022-05-15T13:00:00+00:00");
-  const weatherArray = [
-    { validTime: "2022-05-13T13:00:00+00:00/PT1H", value: 21.666666666666668 },
-    { validTime: "2022-05-13T14:00:00+00:00/PT1H", value: 21.666666666666668 },
-    { validTime: "2022-05-14T14:00:00+00:00/PT1H", value: 20 },
-    { validTime: "2022-05-14T15:00:00+00:00/PT1H", value: 20 },
-    { validTime: "2022-05-15T15:00:00+00:00/PT1H", value: 21.666666666666668 },
-    { validTime: "2022-05-15T16:00:00+00:00/PT1H", value: 21.666666666666668 },
-  ];
   it("Gets only items from the correct date", () => {
-    const output = getEventsInDate(targetDate, weatherArray);
+    const weatherArray = [
+      { validTime: "2022-05-13T13:00:00+00:00/PT1H", value: 21.666666666666668 },
+      { validTime: "2022-05-13T14:00:00+00:00/PT1H", value: 21.666666666666668 },
+      { validTime: "2022-05-14T14:00:00+00:00/PT1H", value: 20 },
+      { validTime: "2022-05-14T15:00:00+00:00/PT1H", value: 20 },
+      { validTime: "2022-05-15T15:00:00+00:00/PT1H", value: 21.666666666666668 },
+      { validTime: "2022-05-15T16:00:00+00:00/PT1H", value: 21.666666666666668 },
+    ];
+    const output = getEventsForDate(targetDate, weatherArray);
     expect(output).toBeArray();
     expect(output).toHaveLength(2);
+    expect(output).toEqual([
+      { validTime: "2022-05-15T15:00:00+00:00/PT1H", value: 21.666666666666668 },
+      { validTime: "2022-05-15T16:00:00+00:00/PT1H", value: 21.666666666666668 },
+    ]);
+  });
+  it("Gets items from previous days if there are no matches for the targeted day", () => {
+    const weatherArray = [
+      { validTime: "2022-05-13T13:00:00+00:00/PT1H", value: 21.666666666666668 },
+      { validTime: "2022-05-13T14:00:00+00:00/PT1H", value: 21.666666666666668 },
+      { validTime: "2022-05-14T14:00:00+00:00/PT1H", value: 20 },
+      { validTime: "2022-05-14T15:00:00+00:00/PT1H", value: 20 },
+      { validTime: "2022-05-16T15:00:00+00:00/PT1H", value: 21.666666666666668 },
+      { validTime: "2022-05-16T16:00:00+00:00/PT1H", value: 21.666666666666668 },
+    ];
+    const output = getEventsForDate(targetDate, weatherArray);
+    expect(output).toBeArray();
+    expect(output).toHaveLength(2);
+    expect(output).toEqual([
+      { validTime: "2022-05-14T14:00:00+00:00/PT1H", value: 20 },
+      { validTime: "2022-05-14T15:00:00+00:00/PT1H", value: 20 },
+    ]);
   });
 });
