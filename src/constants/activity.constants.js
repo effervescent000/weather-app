@@ -19,7 +19,7 @@ export const activitiesArray = [
     name: "Surfing",
     conditions: {
       probabilityOfPrecipitation: [0, 20],
-      waveHeight: [1.2, 2.5],
+      waveHeight: [1, 2.5],
     },
     icon: `${process.env.PUBLIC_URL}/assets/images/surfing.png`,
   },
