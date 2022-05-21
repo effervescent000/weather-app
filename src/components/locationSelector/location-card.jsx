@@ -1,5 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar as emptyStar } from "@fortawesome/free-regular-svg-icons";
+import { faStar as fullStar } from "@fortawesome/free-solid-svg-icons";
 
 import { locationConstants } from "../../constants/location.constants";
 
@@ -10,13 +13,19 @@ const LocationCard = ({ location }) => {
 
   return (
     <div
-      className={`location-card${location.id === currentLocation.id ? " active" : ""}`}
-      onClick={() => setCurrentLocation()}
+      className={`location-card d-flex justify-space-between${
+        location.id === currentLocation.id ? " active" : ""
+      }`}
     >
-      <span className="city">{location.name}</span>,{" "}
-      <span className="region">{location.region}</span>
-      {", "}
-      <span className="country">{location.country}</span>
+      <div className="info" onClick={() => setCurrentLocation()}>
+        <span className="city">{location.name}</span>,{" "}
+        <span className="region">{location.region}</span>
+        {", "}
+        <span className="country">{location.country}</span>
+      </div>
+      <div className="star">
+        <FontAwesomeIcon icon={emptyStar} />
+      </div>
     </div>
   );
 };
