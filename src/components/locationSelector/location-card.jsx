@@ -1,10 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar as emptyStar } from "@fortawesome/free-regular-svg-icons";
-import { faStar as fullStar } from "@fortawesome/free-solid-svg-icons";
 
 import { locationConstants } from "../../constants/location.constants";
+
+import FavoriteIcon from "./favorite-icon";
 
 const LocationCard = ({ location }) => {
   const currentLocation = useSelector((state) => state.location);
@@ -24,7 +23,7 @@ const LocationCard = ({ location }) => {
         <span className="country">{location.country}</span>
       </div>
       <div className="star">
-        <FontAwesomeIcon icon={emptyStar} />
+        <FavoriteIcon location={location} />
       </div>
     </div>
   );
