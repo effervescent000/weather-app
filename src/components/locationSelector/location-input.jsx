@@ -17,7 +17,15 @@ const LocationInput = (props) => {
     }
   };
 
-  return <input type="text" value={locationInput} onChange={handleChange} name="location-input" />;
+  return (
+    <input
+      type="text"
+      placeholder="Start typing your location"
+      value={locationInput}
+      onChange={handleChange}
+      name="location-input"
+    />
+  );
 };
 
 export default LocationInput;

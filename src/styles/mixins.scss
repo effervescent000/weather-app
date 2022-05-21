@@ -6,9 +6,13 @@
   @content;
 }
 
-@mixin card-styling {
+@mixin card-padding-and-margin {
   margin: 0.5em;
   padding: 0.25em;
+}
+
+@mixin card-styling {
+  @include card-padding-and-margin();
   border: 1px $light-blue solid;
   border-radius: 5px;
   @content;
