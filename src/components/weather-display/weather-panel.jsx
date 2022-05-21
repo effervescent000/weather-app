@@ -7,9 +7,10 @@ import weatherApiService from "../../utils/weatherApiService";
 import WeatherCard from "./weather-card";
 import { matchWeatherToTime } from "../../utils/utils";
 
-const WeatherPanel = (props) => {
+const WeatherPanel = () => {
   const currentLocation = useSelector((state) => state.location);
   const weather = useSelector((state) => state.weather);
+  const [weatherCards, setWeatherCards] = useState([]);
   const dispatch = useDispatch();
   const setWeather = (data) => dispatch({ type: weatherConstants.SET_WEATHER, weather: data });
 
@@ -37,6 +38,12 @@ const WeatherPanel = (props) => {
       );
     }
   }, [gridData]);
+
+  useEffect(() => {
+    if (Object.keys(weather.temperature).length) {
+      setWeatherCards(renderWeatherCards());
+    }
+  }, [weather]);
 
   const renderWeatherCards = () => {
     const cards = [];
@@ -70,11 +77,7 @@ const WeatherPanel = (props) => {
     return cards;
   };
 
-  return (
-    <div className="weather-panel">
-      {Object.keys(weather.temperature).length && renderWeatherCards()}
-    </div>
-  );
+  return <div className="weather-panel">{weatherCards}</div>;
 };
 
 export default WeatherPanel;

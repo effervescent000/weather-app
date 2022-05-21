@@ -1,6 +1,12 @@
 .locations-panel {
   @include panel-styling();
-
+  min-height: 350px;
+  input {
+    @include card-padding-and-margin();
+    border: $light-blue solid 1px;
+    width: max(15em, 50%);
+    color: $dark-green;
+  }
   .location-card {
     @include card-styling();
 
