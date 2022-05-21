@@ -1,21 +1,6 @@
 import { locationDataConstants } from "../constants/locationData.constants";
 
-const baseState = [
-  {
-    id: 0,
-    wikiDataId: "",
-    type: "",
-    city: "",
-    name: "",
-    country: "",
-    countryCode: "",
-    region: "",
-    regionCode: "",
-    latitude: 0,
-    longitude: 0,
-    population: 0,
-  },
-];
+const baseState = [];
 
 const locationDataReducer = (state = baseState, action) => {
   switch (action.type) {
@@ -25,4 +10,5 @@ const locationDataReducer = (state = baseState, action) => {
       return state;
   }
 };
+
 export default locationDataReducer;
