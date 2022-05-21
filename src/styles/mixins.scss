@@ -1,5 +1,5 @@
 @mixin panel-styling {
-  width: max(250px, 20vw);
+  width: max(500px, 15vw);
   border: 1px $blue-gray solid;
   border-radius: 5px;
   margin: 0.25em;
@@ -11,5 +11,11 @@
   padding: 0.25em;
   border: 1px $light-blue solid;
   border-radius: 5px;
+  @content;
+}
+
+@mixin active-styling {
+  border: 2px $light-blue solid;
+  background-color: $light-blue;
   @content;
 }
