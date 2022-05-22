@@ -9,3 +9,8 @@ export const removeFavorite = (favorite) => ({
   type: favoritesConstants.REMOVE_FAVORITE,
   favorite,
 });
+
+export const setFavorites = (favorites) => ({
+  type: favoritesConstants.SET_FAVORITES,
+  favorites,
+});

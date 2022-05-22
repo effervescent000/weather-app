@@ -8,6 +8,8 @@ const favoritesReducer = (state = baseState, action) => {
       return [...state, action.favorite];
     case favoritesConstants.REMOVE_FAVORITE:
       return state.filter((loc) => loc.id !== action.favorite.id);
+    case favoritesConstants.SET_FAVORITES:
+      return action.favorites;
     default:
       return state;
   }
