@@ -1,13 +1,26 @@
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import jsCookie from "js-cookie";
+
 import "bootstrap/scss/bootstrap.scss";
 import "./styles/main.scss";
 
-import React from "react";
+import { favoritesConstants } from "./constants/favorites.constants";
 
 import LocationsPanel from "./components/locationSelector/locations-panel";
 import WeatherPanel from "./components/weather-display/weather-panel";
 import ActivitiesWrapper from "./components/activites/activities-wrapper";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const favorites = jsCookie.get("favoriteLocations");
+    if (favorites) {
+      dispatch({ type: favoritesConstants.SET_FAVORITES, favorites: JSON.parse(favorites) });
+    }
+  }, []);
+
   return (
     <div className="app d-flex justify-center">
       <div className="page-wrapper">
