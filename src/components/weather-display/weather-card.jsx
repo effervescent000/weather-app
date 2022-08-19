@@ -26,6 +26,7 @@ const WeatherCard = ({ temp, primary, weather, skyCover, time }) => {
     if (weather) {
       setWeatherConditions(getWeatherConditions());
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [weather, skyCover, temp]);
 
   const getWeatherConditions = () => {

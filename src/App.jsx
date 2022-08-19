@@ -19,6 +19,7 @@ function App() {
     if (favorites) {
       dispatch({ type: favoritesConstants.SET_FAVORITES, favorites: JSON.parse(favorites) });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
