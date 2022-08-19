@@ -25,7 +25,7 @@
   },
   "scripts": {
     "start": "react-scripts --optimize_for_size --max_old_space_size=460 start",
-    "build": "react-scripts build --optimize_for_size --max_old_space_size=460",
+    "build": "react-scripts --optimize_for_size --max_old_space_size=460 build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "test:debug": "react-scripts --inspect-brk test --runInBand --no-cache"
