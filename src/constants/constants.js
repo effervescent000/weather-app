@@ -13,7 +13,7 @@ export const weatherKeys = [
 
 export const locationURLs = (countryIds = "US", namePrefix = "") => {
   return {
-    ROOT: "http://geodb-free-service.wirefreethought.com/v1/geo",
+    ROOT: "https://geodb-free-service.wirefreethought.com/v1/geo",
     CITIES: `cities?${countryIds ? `countryIds=${countryIds}&` : ""}namePrefix=${namePrefix}`,
   };
 };
