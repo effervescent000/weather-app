@@ -6,26 +6,26 @@ const TableCell = ({ id, weather }) => {
   const [style, setStyle] = useState({});
 
   useEffect(() => {
+    const checkConditions = () => {
+      if (activity.name && Object.keys(weather).length) {
+        for (const activityKey of Object.keys(activity.conditions)) {
+          if (!weather[activityKey]) {
+            return { backgroundColor: "red" };
+          }
+          if (
+            weather[activityKey].value > activity.conditions[activityKey][1] ||
+            weather[activityKey].value < activity.conditions[activityKey][0]
+          ) {
+            return {};
+          }
+        }
+        return { backgroundColor: "#17b890" };
+      }
+      return {};
+    };
+
     setStyle(checkConditions());
   }, [weather, activity]);
-
-  const checkConditions = () => {
-    if (activity.name && Object.keys(weather).length) {
-      for (const activityKey of Object.keys(activity.conditions)) {
-        if (!weather[activityKey]) {
-          return { backgroundColor: "red" };
-        }
-        if (
-          weather[activityKey].value > activity.conditions[activityKey][1] ||
-          weather[activityKey].value < activity.conditions[activityKey][0]
-        ) {
-          return {};
-        }
-      }
-      return { backgroundColor: "#17b890" };
-    }
-    return {};
-  };
 
   return <td data-testid={`background-${id}`} id={`background-${id}`} style={style} />;
 };

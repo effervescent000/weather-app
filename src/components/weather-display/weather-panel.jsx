@@ -12,10 +12,8 @@ const WeatherPanel = () => {
   const weather = useSelector((state) => state.weather);
   const [weatherCards, setWeatherCards] = useState([]);
   const dispatch = useDispatch();
-  const setWeather = (data) => dispatch({ type: weatherConstants.SET_WEATHER, weather: data });
 
   const [gridData, setGridData] = useState({});
-  const now = new Date();
 
   useEffect(() => {
     if (Object.keys(currentLocation).length > 0) {
@@ -30,6 +28,8 @@ const WeatherPanel = () => {
   }, [currentLocation]);
 
   useEffect(() => {
+    const setWeather = (data) => dispatch({ type: weatherConstants.SET_WEATHER, weather: data });
+
     if (Object.keys(gridData).length > 0) {
       weatherApiService.GET(
         weatherURLs({ office: gridData.office, gridX: gridData.gridX, gridY: gridData.gridY })
@@ -37,45 +37,47 @@ const WeatherPanel = () => {
         (response) => setWeather(response.data.properties)
       );
     }
-  }, [gridData]);
+  }, [gridData, dispatch]);
 
   useEffect(() => {
+    const now = new Date();
+
+    const renderWeatherCards = () => {
+      const cards = [];
+      const updateTime = (i) => {
+        const updatedTime = new Date(now);
+        updatedTime.setHours(updatedTime.getHours() + i);
+        return updatedTime;
+      };
+      cards.push(
+        <WeatherCard
+          primary
+          key={0}
+          temp={matchWeatherToTime(now, weather.temperature.values)}
+          weather={matchWeatherToTime(now, weather.weather.values)}
+          skyCover={matchWeatherToTime(now, weather.skyCover.values)}
+          time={now}
+        />
+      );
+      for (let i = 1; i < 6; i++) {
+        const updatedTime = updateTime(i);
+        cards.push(
+          <WeatherCard
+            key={i}
+            temp={matchWeatherToTime(updatedTime, weather.temperature.values)}
+            weather={matchWeatherToTime(updatedTime, weather.weather.values)}
+            skyCover={matchWeatherToTime(updatedTime, weather.skyCover.values)}
+            time={updatedTime}
+          />
+        );
+      }
+      return cards;
+    };
+
     if (Object.keys(weather.temperature).length) {
       setWeatherCards(renderWeatherCards());
     }
   }, [weather]);
-
-  const renderWeatherCards = () => {
-    const cards = [];
-    const updateTime = (i) => {
-      const updatedTime = new Date(now);
-      updatedTime.setHours(updatedTime.getHours() + i);
-      return updatedTime;
-    };
-    cards.push(
-      <WeatherCard
-        primary
-        key={0}
-        temp={matchWeatherToTime(now, weather.temperature.values)}
-        weather={matchWeatherToTime(now, weather.weather.values)}
-        skyCover={matchWeatherToTime(now, weather.skyCover.values)}
-        time={now}
-      />
-    );
-    for (let i = 1; i < 6; i++) {
-      const updatedTime = updateTime(i);
-      cards.push(
-        <WeatherCard
-          key={i}
-          temp={matchWeatherToTime(updatedTime, weather.temperature.values)}
-          weather={matchWeatherToTime(updatedTime, weather.weather.values)}
-          skyCover={matchWeatherToTime(updatedTime, weather.skyCover.values)}
-          time={updatedTime}
-        />
-      );
-    }
-    return cards;
-  };
 
   return <div className="weather-panel">{weatherCards}</div>;
 };

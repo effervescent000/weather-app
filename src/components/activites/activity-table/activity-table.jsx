@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useSelector } from "react-redux";
 
 import { weatherKeys } from "../../../constants/constants";
@@ -11,32 +11,32 @@ import HoursHeader from "./hours-header";
 const ActivityTable = () => {
   const weather = useSelector((state) => state.weather);
   const [weatherArray, setWeatherArray] = useState([]);
-  const today = new Date();
+  const today = useMemo(() => new Date(), []);
 
   useEffect(() => {
+    const makeWeatherArrays = () => {
+      const assembleWeatherArray = (date) => {
+        const dayConditions = {};
+        for (const key of weatherKeys) {
+          dayConditions[key] = getEventsForDate(date, weather[key].values);
+        }
+        return dayConditions;
+      };
+
+      today.setHours(0);
+      const weatherArrays = [];
+      for (let i = 0; i < NUM_DAYS; i++) {
+        const newDate = new Date(today);
+        newDate.setDate(today.getDate() + i);
+        weatherArrays.push(assembleWeatherArray(newDate));
+      }
+      return weatherArrays;
+    };
+
     if (Object.keys(weather.temperature).length) {
       setWeatherArray(makeWeatherArrays());
     }
-  }, [weather]);
-
-  const makeWeatherArrays = () => {
-    const assembleWeatherArray = (date) => {
-      const dayConditions = {};
-      for (const key of weatherKeys) {
-        dayConditions[key] = getEventsForDate(date, weather[key].values);
-      }
-      return dayConditions;
-    };
-
-    today.setHours(0);
-    const weatherArrays = [];
-    for (let i = 0; i < NUM_DAYS; i++) {
-      const newDate = new Date(today);
-      newDate.setDate(today.getDate() + i);
-      weatherArrays.push(assembleWeatherArray(newDate));
-    }
-    return weatherArrays;
-  };
+  }, [weather, today]);
 
   const renderTableBody = () => {
     const newDate = new Date(today);
